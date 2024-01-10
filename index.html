@@ -11,8 +11,8 @@
         <h1>Welcome to my website</h1>
         
         <form action="#" method="post" id="waterForm">
-            <label for="timeSelection">Time (24-hour format):</label>
-            <input type="time" id="timeSelection" name="timeSelection" required>
+            <label for="timeSelection">Select Time (24-hour format):</label>
+            <input type="range" id="timeSelection" name="timeSelection" min="0" max="23" step="1" value="" />
 
             <label for="amountSelection">Amount of water (ml):</label>
             <input type="range" id="amountSelection" name="amountSelection" min="50" max="1000" step="50" value="500">
