@@ -4,11 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>My Website</title>
+    <title>My Water Tracker</title>
 </head>
 <body>
     <div class="container">
         <h1>Welcome to my website</h1>
+        
+        <form action="#" method="post" id="waterForm">
+            <label for="timeSelection">Time (24-hour format):</label>
+            <input type="time" id="timeSelection" name="timeSelection" required>
+
+            <label for="amountSelection">Amount of water (ml):</label>
+            <input type="range" id="amountSelection" name="amountSelection" min="50" max="1000" step="50" value="500">
+            <output for="amountSelection" id="amountOutput">500 ml</output>
+
+            <button type="submit">Submit</button>
+        </form>
     </div>
 </body>
 </html>
