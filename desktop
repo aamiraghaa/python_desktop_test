@@ -1,0 +1,52 @@
+import time
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+import pyautogui
+from reportlab.pdfgen import canvas
+from openpyxl import load_workbook
+
+def take_screenshot_and_save_as_pdf(screenshots, pdf_filename):
+    c = canvas.Canvas(pdf_filename)
+
+    for screenshot in screenshots:
+        c.drawInlineImage(screenshot, 0, 0, width=595, height=842)
+        c.showPage()
+
+    c.save()
+
+def main():
+    # Load links from Excel file
+    excel_file_path = 'your_excel_file.xlsx'
+    workbook = load_workbook(excel_file_path)
+    sheet = workbook.active
+    links = [cell.value for cell in sheet['A']]
+
+    # Initialize WebDriver (you can choose between Chrome and Edge)
+    driver = webdriver.Chrome()  # or webdriver.Edge()
+
+    # Perform the tasks for each link
+    screenshots = []
+    for link in links:
+        driver.get("https://www.google.com")
+        
+        # Find the search bar and input the link
+        search_bar = driver.find_element("name", "q")
+        search_bar.send_keys(link)
+        search_bar.send_keys(Keys.RETURN)
+
+        # Wait for the page to load and add a delay (you may adjust this based on your needs)
+        time.sleep(2)
+
+        # Take screenshot and append it to the list
+        screenshot = pyautogui.screenshot()
+        screenshots.append(screenshot)
+
+    # Close the WebDriver
+    driver.quit()
+
+    # Save screenshots as a PDF
+    pdf_filename = 'output.pdf'
+    take_screenshot_and_save_as_pdf(screenshots, pdf_filename)
+
+if __name__ == "__main__":
+    main()
